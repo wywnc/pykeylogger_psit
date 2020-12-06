@@ -1,9 +1,10 @@
-
 """
     Snake Game Project
-    เริ่ม : 27/11/2563 - 20:26
-    แก้ไข : 27/11/2563 - 23:39 [Veerawat]
+    เริ่ม : 27/11/2563 - 20.26
+    แก้ไข : 27/11/2563 - 23.39 [Veerawat]
+           05/12/2563 - 17.11 [Sirichai]
            05/12/2563 - 14.38 [Wanatchporn]
+           06/12/2563 - 22.11 [Veerawat]
     -----------------------------------------------------
     Reference
     - Introduction To Game Building With Python's Turtle Module : https://www.edureka.co/blog/python-turtle-module/
@@ -13,24 +14,39 @@
 import turtle # นำ Module Turtle มาใช้ในการดำเนินการเกี่ยวกับตัวงู
 import time # นำ Module Time มาใช้ในการสร้าง delay
 import random # นำ Module Random มาใช้ในการสุ่มตำแหน่งของอาหาร
+import tkinter as tk # นำ Module tkinter มาใช้ในการสร้างหน้า home
 
+""" Home Page for Start Button """
+def home_page():
+    start = tk.Tk()
+    start.option_add("*Font", "consolas 40")
+    start.title('SnakeGame Project')
+    icon = tk.PhotoImage(file='pic/snakehead.png')
+    start.iconphoto(0, icon)
+    """ ฟังก์ชันเมื่อกดปุ่ม """
+    def clicked():
+        start.destroy()
+        return 0
+    tk.Button(start, text = "SnakeGame Project", width = 20).pack()
+    tk.Button(start, text = "Start", bg = "blue", bd = 10, command=clicked).pack(fill = tk.X)
+    start.mainloop()
 
-
+home_page() # เริ่มหน้า Home
 """ สร้างหน้าจอสำหรับการเล่นโดย Turtle Module """
 win = turtle.Screen() # สร้างหน้าจอ
-win.title("Snake Game Project") # Title ของหน้าจอที่สร้างขึ้น
+win.title("SnakeGame Project") # Title ของหน้าจอที่สร้างขึ้น
 win.bgcolor("green") # เปลี่ยนสีพื้นหลัง
 win.setup(width=600,height=600) # ตั้งค่าขนาดหน้าจอ
 win.tracer(0) # ตั้งให้หน้าจอไม่มีการปรับแต่งอะไรเพิ่ม
 
 """ สร้างหัวงูเพื่อใช้ในการเล่น """
-turtle.register_shape('snakehead.gif') #import รูป สำหรับใช้เป็นหัวงู
-turtle.register_shape('snakehead_down.gif')
-turtle.register_shape('snakehead_right.gif')
-turtle.register_shape('snakehead_left.gif')
+win.register_shape('pic/snakehead.gif') #import รูป สำหรับใช้เป็นหัวงู
+win.register_shape('pic/snakehead_down.gif')
+win.register_shape('pic/snakehead_right.gif')
+win.register_shape('pic/snakehead_left.gif')
 head = turtle.Turtle() # สร้าง Turtle ซึ่งในที่นี้ใช้แทนหัวงู
 head.speed(0) # กำหนดความเร็วของงู
-head.shape('snakehead.gif') # กำหนดลักษณะหัวงู โดยใช้รูปที่ import มา
+head.shape('pic/snakehead.gif') # กำหนดลักษณะหัวงู โดยใช้รูปที่ import มา
 head.penup() # ยกปากกาขึ้นทำให้ไม่มีขีดตรงจุดเริ่มต้น
 head.goto(0, 100) # ตั้งตำแหน่งของงู
 head.direction = "stop" # หยุดการเคลื่อนที่งู
@@ -42,7 +58,7 @@ food.shape("circle") # ทำให้ลักษณะเป็นวงกล
 food.color("red") # สีของอาหารเป็นสีแดง
 food.penup() # ทำให้ไม่มีการขีดเขียนบนตำแหน่งของอาหาร
 food.shapesize(0.50, 0.50) # ขนาดของวงกลม
-food.goto(0, 0) # ตั้งตำแหน่งของอาหาร
+food.goto(random.randint(-290, 290), random.randint(-290, 290)) # ตั้งตำแหน่งของอาหาร
 
 segments = [] # List เปล่าเพื่อเพิ่มความยาวของงู
 
@@ -62,24 +78,22 @@ pen.write("Score: 0 High Score: {}".format(high_score), align="center", font=("C
 
 """ Function """
 def move(): # ฟังก์ชันเดิน
+    y = head.ycor() # กำหนดให้ตัวแปร y เป็นทิศทางการเดินของงูตามแกน y
+    x = head.xcor() # กำหนดให้ตัวแปร x เป็นทิศทางการเดินของงูตามแกน x
     if head.direction == "up": # ถ้าหัวของงูหันไปทางด้านบน
-        y = head.ycor() # กำหนดให้ตัวแปร y เป็นทิศทางการเดินของงูตามแกน y
-        head.shape('snakehead.gif')
+        head.shape('pic/snakehead.gif')
         head.sety(y + 20) # ตัวงูจะเดินไปข้างหน้าโดยแกน y + ไปทีละ 20 ต่อการเรียกฟังก์ชัน 1 ครั้ง
  
     if head.direction == "down": # ถ้าหัวของงูหันไปทางด้านล่าง
-        y = head.ycor() # กำหนดให้ตัวแปร y เป็นทิศทางการเดินของงูตามแกน y
-        head.shape('snakehead_down.gif')
+        head.shape('pic/snakehead_down.gif')
         head.sety(y - 20) # ตัวงูจะเดินไปข้างหลังโดยแกน y - ไปทีละ 20 ต่อการเรียกฟังก์ชัน 1 ครั้ง
  
     if head.direction == "right":
-        x = head.xcor() # กำหนดให้ตัวแปร x เป็นทิศทางการเดินของงูตามแกน x
-        head.shape('snakehead_right.gif')
+        head.shape('pic/snakehead_right.gif')
         head.setx(x + 20) # ตัวงูจะเดินไปข้างขวาโดยแกน x + ไปทีละ 20 ในการเรียกฟังก์ชัน 1 ครั้ง
  
     if head.direction == "left":
-        x = head.xcor() # กำหนดให้ตัวแปร x เป็นทิศทางการเดินของงูตามแกน x
-        head.shape('snakehead_left.gif')
+        head.shape('pic/snakehead_left.gif')
         head.setx(x - 20) # ตัวงูจะเดินไปข้างซ้ายโดยแกน x - ไปทีละ 20 ในการเรียกฟังก์ชัน 1 ครั้ง
 
 # เนื่องจากงูเคลื่อนที่สวนทางในทันทีไม่ได้
@@ -124,10 +138,11 @@ while True:
            segment.goto(1000, 1000)
  
         # รีเซ็ตหาง
-        segments = []
+        segments.clear()
 
         # reset score
         score = 0
+        delay = 0.1
 
         # update score
         pen.clear()
@@ -142,8 +157,8 @@ while True:
         food.goto(x, y) # ตั้งตำแหน่งของอาหาร
 
         """ เมื่องูกินอาหารแล้วความยาวของตัวงูเพิ่มขึ้น """
-        snakebody = 'snakebody.gif' #เพิ่มรูปหัวงู
-        turtle.register_shape(snakebody) #import รูป สำหรับใช้เป็นหัวงู
+        snakebody = 'pic/snakebody.gif' #เพิ่มรูปหัวงู
+        win.register_shape(snakebody) #import รูป สำหรับใช้เป็นหัวงู
         new_segment = turtle.Turtle()
         new_segment.speed(0)
         new_segment.shape(snakebody)
@@ -151,6 +166,7 @@ while True:
         segments.append(new_segment) # เพิ่มหางไปใน list
 
         score += 10 # เพิ่มคะแนน
+        delay -= 0.0005
  
         if score > high_score: # ถ้าคะแนนที่ได้มากกว่าคะแนนสูงสุด
             high_score = score # คะแนนสูงสุดจะกลายเป็นคะแนนที่ได้ล่าสุด
@@ -186,10 +202,11 @@ while True:
                 segment.goto(1000, 1000)
 
             # รีเซ็ตหาง
-            segment.clear()
+            segments.clear()
 
             # reset score
             score = 0
+            delay = 0.1
 
             # update score
             pen.clear() # ลบ Text อันเก่า
