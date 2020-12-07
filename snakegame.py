@@ -35,7 +35,8 @@ home_page() # เริ่มหน้า Home
 """ สร้างหน้าจอสำหรับการเล่นโดย Turtle Module """
 win = turtle.Screen() # สร้างหน้าจอ
 win.title("SnakeGame Project") # Title ของหน้าจอที่สร้างขึ้น
-win.bgcolor("green") # เปลี่ยนสีพื้นหลัง
+win.register_shape('pic/grassterrain.gif')
+win.bgpic("pic/grassterrain.gif") # เปลี่ยนสีพื้นหลัง
 win.setup(width=600,height=600) # ตั้งค่าขนาดหน้าจอ
 win.tracer(0) # ตั้งให้หน้าจอไม่มีการปรับแต่งอะไรเพิ่ม
 
