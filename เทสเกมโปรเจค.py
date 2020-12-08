@@ -1,0 +1,15 @@
+from tkinter import *
+
+start = Tk()
+start.option_add("*Font", "consolas 40")
+Button(start, text = "turtle module", width = 20).pack()
+Button(start, text = "Start", bg = "blue", bd = 10).pack(fill = X)
+#top = PhotoImage(file="W.jpg")
+#DDD = PhotoImage(file="D.png")
+#SSS = PhotoImage(file="S.png")
+#AAA = PhotoImage(file="A.png")
+#Button(start, text = "W", image=top, compound=LEFT).pack()
+#Button(start, text = "D", image=DDD, compound=LEFT).pack()
+#Button(start, text = "S", image=SSS, compound=LEFT).pack()
+#Button(start, text = "A", image=AAA, compound=LEFT).pack()
+start.mainloop()
