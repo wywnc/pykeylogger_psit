@@ -158,7 +158,7 @@ while True:
         food.goto(x, y) # ตั้งตำแหน่งของอาหาร
 
         """ เมื่องูกินอาหารแล้วความยาวของตัวงูเพิ่มขึ้น """
-        snakebody = 'pic/snakebody.gif' #เพิ่มรูปหัวงู
+        snakebody = 'pic/tiles.gif' #เพิ่มรูปหัวงู
         win.register_shape(snakebody) #import รูป สำหรับใช้เป็นหัวงู
         new_segment = turtle.Turtle()
         new_segment.speed(0)
