@@ -6,6 +6,7 @@
            05/12/2563 - 14.38 [Wanatchporn]
            06/12/2563 - 22.11 [Veerawat]
            12/12/2563 - 01.06 [Veerawat]
+           12/12/2563 - 15.35 [Wanatchporn]
     -----------------------------------------------------
     Reference
     - Introduction To Game Building With Python's Turtle Module : https://www.edureka.co/blog/python-turtle-module/
@@ -161,7 +162,7 @@ while True:
         segments.append(new_segment) # เพิ่มหางไปใน list
 
         score += 10 # เพิ่มคะแนน
-        delay -= 0.0005
+        delay -= 0.001
  
         if score > high_score: # ถ้าคะแนนที่ได้มากกว่าคะแนนสูงสุด
             high_score = score # คะแนนสูงสุดจะกลายเป็นคะแนนที่ได้ล่าสุด
