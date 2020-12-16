@@ -7,6 +7,7 @@
            06/12/2563 - 22.11 [Veerawat]
            12/12/2563 - 01.06 [Veerawat]
            12/12/2563 - 15.35 [Wanatchporn]
+           16/12/2563 - 16.19 [Luksamee]
     -----------------------------------------------------
     Reference
     - Introduction To Game Building With Python's Turtle Module : https://www.edureka.co/blog/python-turtle-module/
