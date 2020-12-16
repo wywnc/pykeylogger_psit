@@ -156,9 +156,7 @@ while True:
         snakebody = 'pic/tiles.gif' #เพิ่มรูปหัวงู
         win.register_shape(snakebody) #import รูป สำหรับใช้เป็นหัวงู
         new_segment = turtle.Turtle()
-        new_segment.speed(0)
-        new_segment.shape(snakebody)
-        new_segment.penup()
+        new_segment.speed(0), new_segment.shape(snakebody), new_segment.penup()
         segments.append(new_segment) # เพิ่มหางไปใน list
 
         score += 10 # เพิ่มคะแนน
