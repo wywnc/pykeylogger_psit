@@ -157,11 +157,11 @@ while True:
         snakebody = 'pic/tiles.gif' #เพิ่มรูปหัวงู
         win.register_shape(snakebody) #import รูป สำหรับใช้เป็นหัวงู
         new_segment = turtle.Turtle()
-        new_segment.speed(0), new_segment.shape(snakebody), new_segment.penup()
+        new_segment.speed(0), new_segment.shape(snakebody), new_segment.penup() #ลดบรรทัดให้สั้นลง
         segments.append(new_segment) # เพิ่มหางไปใน list
 
         score += 10 # เพิ่มคะแนน
-        delay -= 0.001
+        delay -= 0.001 #หักดีเลย์
  
         if score > high_score: # ถ้าคะแนนที่ได้มากกว่าคะแนนสูงสุด
             high_score = score # คะแนนสูงสุดจะกลายเป็นคะแนนที่ได้ล่าสุด
